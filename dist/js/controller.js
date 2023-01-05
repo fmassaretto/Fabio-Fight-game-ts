@@ -51,7 +51,7 @@ var Controller = /** @class */ (function () {
             console.log("player.position.y");
             console.log(player.position.y);
             if (player.velocity.y === 0) {
-                player.velocity.y -= 6;
+                player.velocity.y = -7;
             }
         }
         else {

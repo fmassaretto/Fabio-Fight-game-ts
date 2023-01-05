@@ -43,7 +43,17 @@ function playersSetup() {
     { x: 0, y: 0 },
     "./img/Characters/knight/idle/idle_knight_1.png",
     { top: 14, bottom: 10, left: 14, right: 30 },
-    { x: 0, y: 0 }
+    { x: 0, y: 0 },
+     {
+            idle: [
+                { imgSrc: './img/Characters/knight/idle/idle_knight_1.png'},
+                { imgSrc: './img/Characters/knight/idle/idle_knight_2.png'},
+                { imgSrc: './img/Characters/knight/idle/idle_knight_3.png'},
+                { imgSrc: './img/Characters/knight/idle/idle_knight_4.png'},
+                { imgSrc: './img/Characters/knight/idle/idle_knight_5.png'},
+                { imgSrc: './img/Characters/knight/idle/idle_knight_6.png'}
+            ]
+        }
   );
   // this.player1 = new Player({
   //     context: ctx,

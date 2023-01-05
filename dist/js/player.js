@@ -18,7 +18,7 @@ import { Physics } from "./physics.js";
 import { Sprites } from "./sprites.js";
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
-    function Player(context, dimension, position, imgSrc, offset, velocity) {
+    function Player(context, dimension, position, imgSrc, offset, velocity, sprites) {
         if (offset === void 0) { offset = { top: 0, bottom: 0, left: 0, right: 0 }; }
         if (velocity === void 0) { velocity = { x: 0, y: 0 }; }
         var _this = _super.call(this, context, dimension, position, imgSrc, offset) || this;
@@ -65,9 +65,10 @@ var Player = /** @class */ (function (_super) {
         configurable: true
     });
     Player.prototype.update = function () {
+        if (!this.image.complete)
+            return;
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-        // this.velocity.y = 10
         this._physics.applyGravity(this, this._context);
         this._physics.detectHorizontalCollision(this, this._context);
         this._controller.moveWhenKeyPressed(this);

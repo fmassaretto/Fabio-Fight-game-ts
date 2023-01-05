@@ -49,6 +49,7 @@ export class Controller {
     }
     
     moveWhenKeyPressed(player: Player) {
+        
         if (this._keys.a.pressed && this._keys.lastKey === 'a') {
             player.velocity.x = -4;
         } else if (this._keys.d.pressed && this._keys.lastKey === 'd') {
@@ -58,7 +59,7 @@ export class Controller {
             console.log(player.position.y)
 
             if (player.velocity.y === 0) {
-                player.velocity.y -= 6
+                player.velocity.y = -7
             }
         } else {
             player.velocity.x = 0;

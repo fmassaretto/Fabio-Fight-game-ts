@@ -24,7 +24,16 @@ function backgroundSetup() {
     background = new Sprites(ctx, { w: ctx.canvas.width, h: ctx.canvas.height }, { x: 0, y: 0 }, "./img/Background/layer_1.png", { top: 0, bottom: 0, left: 0, right: 0 });
 }
 function playersSetup() {
-    player1 = new Player(ctx, { w: 64, h: 64 }, { x: 0, y: 0 }, "./img/Characters/knight/idle/idle_knight_1.png", { top: 14, bottom: 10, left: 14, right: 30 }, { x: 0, y: 0 });
+    player1 = new Player(ctx, { w: 64, h: 64 }, { x: 0, y: 0 }, "./img/Characters/knight/idle/idle_knight_1.png", { top: 14, bottom: 10, left: 14, right: 30 }, { x: 0, y: 0 }, {
+        idle: [
+            { imgSrc: './img/Characters/knight/idle/idle_knight_1.png' },
+            { imgSrc: './img/Characters/knight/idle/idle_knight_2.png' },
+            { imgSrc: './img/Characters/knight/idle/idle_knight_3.png' },
+            { imgSrc: './img/Characters/knight/idle/idle_knight_4.png' },
+            { imgSrc: './img/Characters/knight/idle/idle_knight_5.png' },
+            { imgSrc: './img/Characters/knight/idle/idle_knight_6.png' }
+        ]
+    });
     // this.player1 = new Player({
     //     context: ctx,
     //     dimension: {w: 64, h: 64},

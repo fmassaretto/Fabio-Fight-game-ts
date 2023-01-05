@@ -21,7 +21,7 @@ export class Physics {
       }
 
       private isStartOfScreen(player: Player, context: CanvasRenderingContext2D): boolean {       
-        return (player.position.x < 0)
+        return player.position.x < 0
       }
       private isEndOfScreen(player: Player, context: CanvasRenderingContext2D): boolean {       
         return ((player.position.x + player.dimension.w) - player.offset.right) >= context.canvas.width;
@@ -34,37 +34,6 @@ export class Physics {
             player.position.x = context.canvas.width - player.dimension.w + player.offset.right
         }
       }
-
-    // checkCollision(ctx: CanvasRenderingContext2D, player: Player): boolean{
-    //     if((player. + player.dimension.h + player.velocity.y - player.offset.b) >= this.context.canvas.height ) {
-    //         return true
-    //     }
-    //     // // if hit the top of the screen don't let go off screen
-    //     // if(player.position.y < 0) {
-    //     //     player.position.y = 0
-    //     // }
-        
-    //     // // if hit left or right of the screen stop moving
-    //     // if (player.position.x < 0 ) {
-    //     //     player.position.x = 0
-    //     // } else if(((player.position.x + player.dimension.w) - player.offset.r) >= ctx.canvas.width){
-    //     //     player.position.x = ctx.canvas.width - player.dimension.w + player.offset.r
-    //     // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //     // if((this.position.y + this.dimension.h + this.velocity.y - this.offset.b) >= this.context.canvas.height ) {
     //     //     this.velocity.y = 0

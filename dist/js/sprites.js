@@ -1,10 +1,13 @@
 var Sprites = /** @class */ (function () {
     function Sprites(context, dimension, position, imgSrc, offset) {
         if (offset === void 0) { offset = { top: 0, bottom: 0, left: 0, right: 0 }; }
+        var _this = this;
         this.image = new Image();
         this.image.src = imgSrc;
+        this.image.onload = function () {
+            _this._dimension = dimension;
+        };
         this._context = context;
-        this._dimension = dimension;
         this._position = position;
         this._offset = offset;
     }

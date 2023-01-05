@@ -7,29 +7,14 @@ export class Player extends Sprites {
   private _physics: Physics;
   private _controller: Controller;
 
-  public get velocity(): Velocity {
-    return this._velocity;
-  }
-
-  public get dimension(): Dimension {
-    return this._dimension;
-  }
-
-  public get position(): Position {
-    return this._position;
-  }
-
-  public get offset(): Offset {
-    return this._offset;
-  }
-
   constructor(
     context: CanvasRenderingContext2D,
     dimension: Dimension,
     position: Position,
     imgSrc: string,
     offset: Offset = { top: 0, bottom: 0, left: 0, right: 0 },
-    velocity: Velocity = { x: 0, y: 0 }
+    velocity: Velocity = { x: 0, y: 0 },
+    sprites: any
   ) {
     super(context, dimension, position, imgSrc, offset);
 
@@ -49,23 +34,34 @@ export class Player extends Sprites {
         this._controller.controlKeyUp(event);
     })
 }
+
+    public get velocity(): Velocity {
+    return this._velocity;
+  }
+
+  public get dimension(): Dimension {
+    return this._dimension;
+  }
+
+  public get position(): Position {
+    return this._position;
+  }
+
+  public get offset(): Offset {
+    return this._offset;
+  }
   
-
   update() {
-
+    if (!this.image.complete) return
 
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
-    
-    // this.velocity.y = 10
+
     this._physics.applyGravity(this, this._context)
     this._physics.detectHorizontalCollision(this, this._context)
     this._controller.moveWhenKeyPressed(this);
     super.draw();
-
   }
-
-
 }
 
 

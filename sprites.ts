@@ -5,7 +5,7 @@ export class Sprites {
     protected _position!: Velocity
     protected _offset!: Offset
 
-    private image = new Image()
+    protected image = new Image()
 
     constructor(
         context: CanvasRenderingContext2D,
@@ -15,9 +15,14 @@ export class Sprites {
         offset: Offset = { top: 0, bottom: 0, left: 0, right: 0 }
 
     ){
+
         this.image.src = imgSrc
+
+        this.image.onload = () => {
+            this._dimension = dimension
+        }
+
         this._context = context
-        this._dimension = dimension
         this._position = position
         this._offset = offset
     }

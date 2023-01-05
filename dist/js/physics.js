@@ -17,7 +17,7 @@ var Physics = /** @class */ (function () {
             context.canvas.height || player.position.y < 0;
     };
     Physics.prototype.isStartOfScreen = function (player, context) {
-        return (player.position.x < 0);
+        return player.position.x < 0;
     };
     Physics.prototype.isEndOfScreen = function (player, context) {
         return ((player.position.x + player.dimension.w) - player.offset.right) >= context.canvas.width;
