@@ -4,8 +4,6 @@ import { Controller } from "./js/classes/Controller.js";
 import { Player } from "./js/classes/Player.js";
 import { Sprites } from "./js/classes/Sprites.js";
 import { CollisionBlock } from "./js/types/collisionBlock.js";
-// import { CollisionBlockData } from "./js/classes/CollisionBlocksData.js";
-// import { CollisionBlock } from "./js/types/collisionBlock.js";
 import { Util } from "./js/utils.js";
 
 let canvas = document.querySelector("canvas");
@@ -29,7 +27,8 @@ let background: Background;
 let ground: Background;
 let shop: Sprites;
 let player1: Player;
-let collisionBlocks: any[];
+let collisionBlocks: any[] = [];
+let collisionBlocksPosition: CollisionBlock[] = [];
 
 function setup() {
   backgroundSetup();
@@ -39,17 +38,22 @@ function setup() {
 }
 
 function collision() {
-  for (
-    let index = 0;
-    index < CollisionBlockData.groundCollionBlockData.length;
-    index += 36
-  ) {
-    const element = CollisionBlockData.groundCollionBlockData.slice(
-      index,
-      index + 36
-    );
+  for (let index = 0; index < CollisionBlockData.groundCollionBlockData.length; index += 36) {
+    const element = CollisionBlockData.groundCollionBlockData.slice(index, index + 36);
     collisionBlocks.push(element);
   }
+
+  collisionBlocks.forEach((element, y) => {
+    element.forEach((_value: any, x: number) => {
+      if (element[x] === 316) {
+        let blockPosition: CollisionBlock = {
+          position: { x: x * Util.tileSize.x, y: y * Util.tileSize.y },
+        };
+        collisionBlocksPosition.push(blockPosition);
+        // console.log(blockPosition);
+      }
+    });
+  });
 }
 
 function backgroundSetup() {
@@ -94,7 +98,8 @@ function decorationsSetup() {
 function playersSetup() {
   player1 = new Player({
     context: ctx,
-    position: { x: 0, y: 0 },
+    position: { x: 50, y: 50 },
+    collisionBlocks: collisionBlocksPosition,
     scale: 1.5,
     imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png",
     frameTotal: 8,
@@ -108,13 +113,25 @@ function playersSetup() {
 
 function gameRun() {
   window.requestAnimationFrame(gameRun);
-  console.log(Util.frameCounter);
+
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   // checkColision(player1, ctx)
   background.draw();
   ground.draw();
+  ctx.save;
+  collisionBlocksPosition.forEach((collisionBlock) => {
+    // console.log(a);
+    ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
+    ctx.fillRect(
+      collisionBlock.position.x,
+      collisionBlock.position.y,
+      Util.tileSize.x,
+      Util.tileSize.y
+    );
+  });
+  ctx.restore;
   shop.update();
   player1.update();
 }
