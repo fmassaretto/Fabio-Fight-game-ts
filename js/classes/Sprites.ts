@@ -56,14 +56,10 @@ export class Sprites {
   }
 
   draw() {
-    if (Util.debug) {
+    const debuggerType = this.image.src.search("\bCharacters\b") ? "player" : "none";
+    if (Util.getDebug(debuggerType) && debuggerType === "player") {
       this._context.fillStyle = "rgba(255, 0, 0, 0.4)";
-      this._context.fillRect(
-        this._position.x,
-        this._position.y,
-        this.width,
-        this.height
-      );
+      this._context.fillRect(this._position.x, this._position.y, this.width, this.height);
     }
 
     this._context.drawImage(

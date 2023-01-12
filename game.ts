@@ -106,7 +106,8 @@ function playersSetup() {
     offset: { top: 94, bottom: 20, left: 75, right: 90 },
     velocity: { x: 0, y: 0 },
     sprites: {
-      idle: { imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png" },
+      idle: { imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png", framesTotal: 8 },
+      run: { imgSrc: "./img/Characters/Martial Hero/Sprites/Run.png", framesTotal: 8 },
     },
   });
 }
@@ -117,21 +118,23 @@ function gameRun() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  // checkColision(player1, ctx)
   background.draw();
   ground.draw();
-  ctx.save;
-  collisionBlocksPosition.forEach((collisionBlock) => {
-    // console.log(a);
-    ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
-    ctx.fillRect(
-      collisionBlock.position.x,
-      collisionBlock.position.y,
-      Util.tileSize.x,
-      Util.tileSize.y
-    );
-  });
-  ctx.restore;
+
+  if (Util.getDebug("collisionBlocks")) {
+    ctx.save;
+    collisionBlocksPosition.forEach((collisionBlock) => {
+      // console.log(a);
+      ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
+      ctx.fillRect(
+        collisionBlock.position.x,
+        collisionBlock.position.y,
+        Util.tileSize.x,
+        Util.tileSize.y
+      );
+    });
+    ctx.restore;
+  }
   shop.update();
   player1.update();
 }

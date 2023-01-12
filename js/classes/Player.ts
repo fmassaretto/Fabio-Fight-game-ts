@@ -3,6 +3,7 @@ import { Controller } from "./Controller.js";
 import { Sprites } from "./Sprites.js";
 import { Physics } from "./Physics.js";
 import { CollisionBlock } from "../types/collisionBlock.js";
+import { Util } from "../utils.js";
 
 export class Player extends Sprites {
   private _physics: Physics;
@@ -41,33 +42,34 @@ export class Player extends Sprites {
     this._collisionBlocks = collisionBlocks;
     this._physics = new Physics({
       player: this,
-      collisionBlocks: this.collisionBlocks,
     });
     this._controller = new Controller();
   }
 
   update(): void {
-    if (!this.image.complete) return;
     super.update();
+    if (!this.image.complete) return;
 
     this.position.x += this.velocity.x;
-    this.updateHitBox();
     // this.position.y += this.velocity.y;
-
+    this.updateHitBox();
     this._physics.checkForHorizontalCollision();
-    this._physics.applyGravity();
+
     this._controller.moveWhenKeyPressed(this);
+    this._physics.applyGravity();
 
-    // this.updateHitBox();
-    // this._physics.checkForVerticalCollision();
+    this.updateHitBox();
+    this._physics.checkForVerticalCollision();
 
-    this.context.fillStyle = "rgba(0, 255, 0, 0.4)";
-    this.context.fillRect(
-      this.hitbox.position.x,
-      this.hitbox.position.y,
-      this.hitbox.dimension.w,
-      this.hitbox.dimension.h
-    );
+    if (Util.getDebug("hitbox")) {
+      this.context.fillStyle = "rgba(0, 255, 0, 0.4)";
+      this.context.fillRect(
+        this.hitbox.position.x,
+        this.hitbox.position.y,
+        this.hitbox.dimension.w,
+        this.hitbox.dimension.h
+      );
+    }
   }
 
   updateHitBox() {
