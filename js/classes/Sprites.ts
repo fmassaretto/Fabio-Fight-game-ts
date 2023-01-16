@@ -1,3 +1,4 @@
+import { SpritesAnimation } from "../types/spritesAnimation.js";
 import { Util } from "../utils.js";
 
 export class Sprites {
@@ -6,7 +7,7 @@ export class Sprites {
   private _context!: CanvasRenderingContext2D;
   protected _scale!: number;
   protected _frameTotal!: number;
-  protected _sprites!: any;
+  protected _sprites!: SpritesAnimation;
   protected image;
 
   width!: number;
@@ -20,22 +21,30 @@ export class Sprites {
     dimension,
     position,
     scale = 1,
-    imgSrc,
+
     offset = { top: 0, bottom: 0, left: 0, right: 0 },
-    frameTotal = 1,
-    sprites,
+
+    spritesAnimation,
   }: {
     context: CanvasRenderingContext2D;
     dimension?: Dimension;
     position: Position;
     scale?: number;
-    imgSrc: string;
-    frameTotal: number;
     offset?: Offset;
-    sprites: any;
+    spritesAnimation: SpritesAnimation;
   }) {
     this.image = new Image();
-    this.image.src = imgSrc;
+    this._sprites = spritesAnimation;
+
+    if (this._sprites.main !== undefined) {
+      this.image.src = this._sprites.main.imgSrc;
+      this._frameTotal = this._sprites.main.framesTotal;
+    }
+
+    if (this._sprites.idle !== undefined) {
+      this.image.src = this._sprites.idle.imgSrc;
+      this._frameTotal = this._sprites.idle.framesTotal;
+    }
 
     this.image.onload = () => {
       if (dimension !== undefined) {
@@ -48,11 +57,9 @@ export class Sprites {
     };
 
     this._context = context;
-    this._frameTotal = frameTotal;
     this._position = position;
     this._offset = offset;
     this._scale = scale;
-    this._sprites = sprites;
   }
 
   draw() {
@@ -88,6 +95,16 @@ export class Sprites {
       } else {
         this.currentFrame = 0;
       }
+    }
+  }
+
+  switchSprite(spriteType: string) {
+    switch (spriteType) {
+      case "run":
+        break;
+
+      default:
+        break;
     }
   }
 

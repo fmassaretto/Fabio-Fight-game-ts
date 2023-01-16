@@ -2,7 +2,7 @@ export class Util {
   private static _frameCounter: number = 0;
   private static _frameCounterMax: number = 10;
   private static _tileSize: Position = { x: 24, y: 24 };
-  // private static _debug: boolean = false;
+  private static _isDebugActive: boolean = false;
   private static _debugLevels: string[] = ["player", "hitbox", "collisionBlocks"]; // types of level to debug: "background", "player", "hitbox", "collisionBlocks"
 
   public static get tileSize(): Position {
@@ -10,10 +10,12 @@ export class Util {
   }
 
   public static getDebug(level: string): boolean {
-    for (let index = 0; index < this._debugLevels.length; index++) {
-      const debugLevel = this._debugLevels[index];
-      if (level === debugLevel) {
-        return true;
+    if (this._isDebugActive) {
+      for (let index = 0; index < this._debugLevels.length; index++) {
+        const debugLevel = this._debugLevels[index];
+        if (level === debugLevel) {
+          return true;
+        }
       }
     }
 

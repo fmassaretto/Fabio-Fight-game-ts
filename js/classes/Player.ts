@@ -4,6 +4,7 @@ import { Sprites } from "./Sprites.js";
 import { Physics } from "./Physics.js";
 import { CollisionBlock } from "../types/collisionBlock.js";
 import { Util } from "../utils.js";
+import { SpritesAnimation } from "../types/spritesAnimation.js";
 
 export class Player extends Sprites {
   private _physics: Physics;
@@ -16,24 +17,24 @@ export class Player extends Sprites {
     context,
     position,
     collisionBlocks,
-    imgSrc,
+
     scale = 1,
     offset = { top: 0, bottom: 0, left: 0, right: 0 },
     velocity = { x: 0, y: 0 },
-    frameTotal,
-    sprites,
+
+    spritesAnimation,
   }: {
     context: CanvasRenderingContext2D;
     position: Position;
     collisionBlocks: CollisionBlock[];
-    imgSrc: string;
+
     scale?: number;
-    frameTotal: number;
+
     offset?: Offset;
     velocity?: Velocity;
-    sprites: any;
+    spritesAnimation: SpritesAnimation;
   }) {
-    super({ context, scale, position, imgSrc, offset, frameTotal, sprites });
+    super({ context, scale, position, offset, spritesAnimation });
 
     this.velocity = velocity;
     this.position = position;

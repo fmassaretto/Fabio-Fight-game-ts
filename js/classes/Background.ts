@@ -1,3 +1,4 @@
+import { SpritesAnimation } from "../types/spritesAnimation.js";
 import { Sprites } from "./Sprites.js";
 
 export class Background extends Sprites {
@@ -5,30 +6,26 @@ export class Background extends Sprites {
     context,
     dimension,
     position,
-    imgSrc,
+
     scale = 1,
-    frameTotal,
+
     offset = { top: 0, bottom: 0, left: 0, right: 0 },
-    sprites,
+    spritesAnimation,
   }: {
     context: CanvasRenderingContext2D;
     dimension: Dimension;
     position: Position;
-    imgSrc: string;
     scale?: number;
-    frameTotal: number;
     offset?: Offset;
-    sprites: any;
+    spritesAnimation: SpritesAnimation;
   }) {
     super({
       context,
       dimension,
       position,
       scale,
-      imgSrc,
       offset,
-      frameTotal,
-      sprites,
+      spritesAnimation,
     });
   }
 

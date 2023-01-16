@@ -52,6 +52,7 @@ export class Controller {
 
   moveWhenKeyPressed(player: Player) {
     if (Controller._keys.a.pressed && Controller._keys.lastKey === "a") {
+      player.switchSprite("run");
       player.velocity.x = -4;
     } else if (Controller._keys.d.pressed && Controller._keys.lastKey === "d") {
       player.velocity.x = 4;

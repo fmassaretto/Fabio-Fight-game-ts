@@ -50,7 +50,6 @@ function collision() {
           position: { x: x * Util.tileSize.x, y: y * Util.tileSize.y },
         };
         collisionBlocksPosition.push(blockPosition);
-        // console.log(blockPosition);
       }
     });
   });
@@ -60,24 +59,18 @@ function backgroundSetup() {
   background = new Sprites({
     dimension: { w: ctx.canvas.width, h: ctx.canvas.height },
     context: ctx,
-    // scale: 3,
     position: { x: 0, y: 0 },
-    imgSrc: "./img/Background/layer_1.png",
-    frameTotal: 1,
-    sprites: {
-      standard: [{ imgSrc: "./img/Background/layer_1.png" }],
+    spritesAnimation: {
+      main: { imgSrc: "./img/Background/layer_1.png", framesTotal: 1 },
     },
   });
 
   ground = new Sprites({
     dimension: { w: ctx.canvas.width, h: ctx.canvas.height },
     context: ctx,
-    // scale: 3,
     position: { x: 0, y: 0 },
-    imgSrc: "./img/Background/ground.png",
-    frameTotal: 1,
-    sprites: {
-      standard: [{ imgSrc: "./img/Background/ground.png" }],
+    spritesAnimation: {
+      main: { imgSrc: "./img/Background/ground.png", framesTotal: 1 },
     },
   });
 }
@@ -87,10 +80,8 @@ function decorationsSetup() {
     context: ctx,
     position: { x: 600, y: 104 },
     scale: 2,
-    imgSrc: "./img/Decorations/Animated Decorations/shop.png",
-    frameTotal: 6,
-    sprites: {
-      standard: [{ imgSrc: "./img/Decorations/Animated Decorations/shop.png" }],
+    spritesAnimation: {
+      main: { imgSrc: "./img/Decorations/Animated Decorations/shop.png", framesTotal: 6 },
     },
   });
 }
@@ -101,11 +92,9 @@ function playersSetup() {
     position: { x: 50, y: 50 },
     collisionBlocks: collisionBlocksPosition,
     scale: 1.5,
-    imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png",
-    frameTotal: 8,
     offset: { top: 94, bottom: 20, left: 75, right: 90 },
     velocity: { x: 0, y: 0 },
-    sprites: {
+    spritesAnimation: {
       idle: { imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png", framesTotal: 8 },
       run: { imgSrc: "./img/Characters/Martial Hero/Sprites/Run.png", framesTotal: 8 },
     },
@@ -124,7 +113,6 @@ function gameRun() {
   if (Util.getDebug("collisionBlocks")) {
     ctx.save;
     collisionBlocksPosition.forEach((collisionBlock) => {
-      // console.log(a);
       ctx.fillStyle = "rgba(255, 0, 0, 0.4)";
       ctx.fillRect(
         collisionBlock.position.x,
