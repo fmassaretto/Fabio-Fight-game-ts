@@ -97,6 +97,8 @@ function playersSetup() {
     spritesAnimation: {
       idle: { imgSrc: "./img/Characters/Martial Hero/Sprites/Idle.png", framesTotal: 8 },
       run: { imgSrc: "./img/Characters/Martial Hero/Sprites/Run.png", framesTotal: 8 },
+      jump: { imgSrc: "./img/Characters/Martial Hero/Sprites/Jump.png", framesTotal: 2 },
+      fall: { imgSrc: "./img/Characters/Martial Hero/Sprites/Fall.png", framesTotal: 2 },
     },
   });
 }

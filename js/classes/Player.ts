@@ -17,19 +17,15 @@ export class Player extends Sprites {
     context,
     position,
     collisionBlocks,
-
     scale = 1,
     offset = { top: 0, bottom: 0, left: 0, right: 0 },
     velocity = { x: 0, y: 0 },
-
     spritesAnimation,
   }: {
     context: CanvasRenderingContext2D;
     position: Position;
     collisionBlocks: CollisionBlock[];
-
     scale?: number;
-
     offset?: Offset;
     velocity?: Velocity;
     spritesAnimation: SpritesAnimation;
@@ -39,12 +35,9 @@ export class Player extends Sprites {
     this.velocity = velocity;
     this.position = position;
     this.offset = offset;
-
     this._collisionBlocks = collisionBlocks;
-    this._physics = new Physics({
-      player: this,
-    });
-    this._controller = new Controller();
+    this._physics = new Physics({ player: this });
+    this._controller = new Controller(this);
   }
 
   update(): void {
@@ -52,15 +45,26 @@ export class Player extends Sprites {
     if (!this.image.complete) return;
 
     this.position.x += this.velocity.x;
-    // this.position.y += this.velocity.y;
+
     this.updateHitBox();
     this._physics.checkForHorizontalCollision();
 
-    this._controller.moveWhenKeyPressed(this);
+    this._controller.moveWhenKeyPressed();
     this._physics.applyGravity();
 
     this.updateHitBox();
     this._physics.checkForVerticalCollision();
+
+    if (this.velocity.y < 0) {
+      this.switchSprite("jump");
+    } else if (this.velocity.y > 0.4) {
+      this.switchSprite("fall");
+    }
+
+    console.log(this.velocity.x);
+    if (this.velocity.y === 0 && this.velocity.x === 0) {
+      this.switchSprite("idle");
+    }
 
     if (Util.getDebug("hitbox")) {
       this.context.fillStyle = "rgba(0, 255, 0, 0.4)";
@@ -74,7 +78,7 @@ export class Player extends Sprites {
   }
 
   updateHitBox() {
-    let hitboxObj = {
+    this.hitbox = {
       position: {
         x: this.position.x + 110,
         y: this.position.y + 105,
@@ -84,8 +88,6 @@ export class Player extends Sprites {
         h: 78,
       },
     };
-
-    this.hitbox = hitboxObj;
   }
 
   public set velocity(value: Velocity) {

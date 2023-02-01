@@ -21,9 +21,7 @@ export class Sprites {
     dimension,
     position,
     scale = 1,
-
     offset = { top: 0, bottom: 0, left: 0, right: 0 },
-
     spritesAnimation,
   }: {
     context: CanvasRenderingContext2D;
@@ -89,7 +87,6 @@ export class Sprites {
 
   animateFrame() {
     if (Util.frameCounter % this.frameHold === 0) {
-      // this._context.fillRect(0, 0, this.width, this.height)
       if (this.currentFrame < this._frameTotal - 1) {
         this.currentFrame++;
       } else {
@@ -100,7 +97,29 @@ export class Sprites {
 
   switchSprite(spriteType: string) {
     switch (spriteType) {
+      case "idle":
+        if (this._sprites.idle !== undefined) {
+          this.image.src = this._sprites.idle?.imgSrc;
+          this._frameTotal = this._sprites.idle?.framesTotal;
+        }
+        break;
       case "run":
+        if (this._sprites.run !== undefined) {
+          this.image.src = this._sprites.run?.imgSrc;
+          this._frameTotal = this._sprites.run?.framesTotal;
+        }
+        break;
+      case "jump":
+        if (this._sprites.jump !== undefined) {
+          this.image.src = this._sprites.jump?.imgSrc;
+          this._frameTotal = this._sprites.jump?.framesTotal;
+        }
+        break;
+      case "fall":
+        if (this._sprites.fall !== undefined) {
+          this.image.src = this._sprites.fall?.imgSrc;
+          this._frameTotal = this._sprites.fall?.framesTotal;
+        }
         break;
 
       default:
