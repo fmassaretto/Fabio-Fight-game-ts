@@ -85,6 +85,10 @@ export class Player extends Sprites {
     };
   }
 
+  attack() {
+    this.switchSprite("attack1");
+  }
+
   public set velocity(value: Velocity) {
     this._velocity = value;
   }

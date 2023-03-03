@@ -6,4 +6,5 @@ export interface SpritesAnimation {
   run?: SpriteProperties;
   jump?: SpriteProperties;
   fall?: SpriteProperties;
+  atack1?: SpriteProperties;
 }

@@ -5,6 +5,7 @@ export class Sprites {
   private _position!: Position;
   private _offset!: Offset;
   private _context!: CanvasRenderingContext2D;
+  protected _isAttacking: boolean = false;
   protected _scale!: number;
   protected _frameTotal!: number;
   protected _sprites!: SpritesAnimation;
@@ -37,11 +38,6 @@ export class Sprites {
     if (this._sprites.main !== undefined) {
       this.image.src = this._sprites.main.imgSrc;
       this._frameTotal = this._sprites.main.framesTotal;
-    }
-
-    if (this._sprites.idle !== undefined) {
-      this.image.src = this._sprites.idle.imgSrc;
-      this._frameTotal = this._sprites.idle.framesTotal;
     }
 
     this.image.onload = () => {
@@ -96,36 +92,65 @@ export class Sprites {
   }
 
   switchSprite(spriteType: string) {
-    switch (spriteType) {
-      case "idle":
-        if (this._sprites.idle !== undefined && this._sprites.idle.imgSrc !== this.image.src) {
-          this.image.src = this._sprites.idle.imgSrc;
-          this._frameTotal = this._sprites.idle.framesTotal;
-        }
-        break;
-      case "run":
-        if (this._sprites.run !== undefined && this._sprites.run.imgSrc !== this.image.src) {
-          this.image.src = this._sprites.run.imgSrc;
-          this._frameTotal = this._sprites.run.framesTotal;
-        }
-        break;
-      case "jump":
-        if (this._sprites.jump !== undefined && this._sprites.jump.imgSrc !== this.image.src) {
-          this.image.src = this._sprites.jump.imgSrc;
-          this._frameTotal = this._sprites.jump.framesTotal;
-          this.currentFrame = 0;
-        }
-        break;
-      case "fall":
-        if (this._sprites.fall !== undefined && this._sprites.fall.imgSrc !== this.image.src) {
-          this.image.src = this._sprites.fall.imgSrc;
-          this._frameTotal = this._sprites.fall.framesTotal;
-          this.currentFrame = 0;
-        }
-        break;
+    const newImage = new Image();
+    if (this._sprites.atack1 != undefined) {
+      newImage.src = this._sprites.atack1.imgSrc;
+    }
 
-      default:
-        break;
+    // console.log("this._sprites.atack1?.imgSrc: " + this._sprites.atack1?.imgSrc);
+    // console.log("this.image.src: " + this.image.src);
+    // console.log("newImage.src: " + newImage.src);
+    // console.log("compare: " + (this.image.src === newImage.src));
+    // console.log("compare: " + (this.currentFrame < this._frameTotal - 1));
+    if (this.image.src === newImage.src && this.currentFrame < this._frameTotal - 1) {
+      this._isAttacking = true;
+    } else {
+      this._isAttacking = false;
+    }
+
+    if (!this._isAttacking) {
+      switch (spriteType) {
+        case "idle":
+          if (this._sprites.idle !== undefined && this._sprites.idle.imgSrc !== this.image.src) {
+            this.image.src = this._sprites.idle.imgSrc;
+            this._frameTotal = this._sprites.idle.framesTotal;
+          }
+          break;
+        case "run":
+          if (this._sprites.run !== undefined && this._sprites.run.imgSrc !== this.image.src) {
+            this.image.src = this._sprites.run.imgSrc;
+            this._frameTotal = this._sprites.run.framesTotal;
+          }
+          break;
+        case "jump":
+          if (this._sprites.jump !== undefined && this._sprites.jump.imgSrc !== this.image.src) {
+            this.image.src = this._sprites.jump.imgSrc;
+            this._frameTotal = this._sprites.jump.framesTotal;
+            this.currentFrame = 0;
+          }
+          break;
+        case "fall":
+          if (this._sprites.fall !== undefined && this._sprites.fall.imgSrc !== this.image.src) {
+            this.image.src = this._sprites.fall.imgSrc;
+            this._frameTotal = this._sprites.fall.framesTotal;
+            this.currentFrame = 0;
+          }
+          break;
+        case "attack1":
+          console.log("attack !!!!!!!!!                                      <------");
+          if (
+            this._sprites.atack1 !== undefined &&
+            this._sprites.atack1.imgSrc !== this.image.src
+          ) {
+            this.image.src = this._sprites.atack1.imgSrc;
+            this._frameTotal = this._sprites.atack1.framesTotal;
+            this.currentFrame = 0;
+          }
+          break;
+
+        default:
+          break;
+      }
     }
   }
 
