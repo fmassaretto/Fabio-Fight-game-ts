@@ -50,20 +50,15 @@ export class Player extends Sprites {
     this._physics.checkForHorizontalCollision();
 
     this._controller.moveWhenKeyPressed();
+    // console.log(this.velocity.y);
+
     this._physics.applyGravity();
 
     this.updateHitBox();
     this._physics.checkForVerticalCollision();
 
-    if (this.velocity.y < 0) {
-      this.switchSprite("jump");
-    } else if (this.velocity.y > 0.4) {
+    if (this.velocity.y > 0.4) {
       this.switchSprite("fall");
-    }
-
-    console.log(this.velocity.x);
-    if (this.velocity.y === 0 && this.velocity.x === 0) {
-      this.switchSprite("idle");
     }
 
     if (Util.getDebug("hitbox")) {

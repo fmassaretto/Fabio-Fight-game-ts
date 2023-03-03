@@ -6,7 +6,21 @@ import { Sprites } from "./js/classes/Sprites.js";
 import { CollisionBlock } from "./js/types/collisionBlock.js";
 import { Util } from "./js/utils.js";
 
+let codeEnableCanvas = "4488";
+
+let button = <HTMLInputElement>document.getElementById("button");
+let codeSection = <HTMLInputElement>document.getElementById("codeSection");
+let textInput = <HTMLInputElement>document.getElementById("code");
+
+button.addEventListener("click", () => {
+  enableCanvas(textInput.value);
+});
+
 let canvas = document.querySelector("canvas");
+if (canvas != undefined) {
+  canvas.style.display = "none";
+}
+
 let contextDefinition = (): CanvasRenderingContext2D => {
   const canvasWidth = 864;
   const canvasHeight = 480;
@@ -29,6 +43,15 @@ let shop: Sprites;
 let player1: Player;
 let collisionBlocks: any[] = [];
 let collisionBlocksPosition: CollisionBlock[] = [];
+
+function enableCanvas(code: string) {
+  if (code === codeEnableCanvas) {
+    if (canvas != undefined) {
+      canvas.style.display = "block";
+      codeSection.style.display = "none";
+    }
+  }
+}
 
 function setup() {
   backgroundSetup();
