@@ -4,15 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Fabio Game Development</title>
 </head>
 <body>
-    <div>
-        <canvas></canvas>
+    <div id="game">
+        <div id="canvas">
+            <canvas></canvas>
+        </div>
+        <div id="controls">
+            <div id="player1">
+                <table>
+                    <tr>Controles Jogador 1:</tr>
+                    <tr>
+                        <td>a</td>
+                        <td>Trás</td>
+                    </tr>
+                    <tr>
+                        <td>d</td>
+                        <td>Frente</td>
+                    </tr>
+                    <tr>
+                        <td>w</td>
+                        <td>Pula</td>
+                    </tr>
+                    <tr>
+                        <td>espaço</td>
+                        <td>Ataca</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="player2">
+                <table>
+                    <tr>Controles Jogador 2:</tr>
+                    <tr>
+                        <td>←</td>
+                        <td>Trás</td>
+                    </tr>
+                    <tr>
+                        <td>→</td>
+                        <td>Frente</td>
+                    </tr>
+                    <tr>
+                        <td>↑</td>
+                        <td>Pula</td>
+                    </tr>
+                    <tr>
+                        <td>Ctrl</td>
+                        <td>Ataca</td>
+                    </tr>
+                </table>
+            </div>
+            
+            
+        </div>
     </div>
+    
     <div id="codeSection">
         <input type="text" id="code" placeholder="Digite o numero aqui"></input>
         <button id="button">Confirmar</button>
+        <img src="" id="imageQR">
+    </div>
+    <div id="imageUpload">
+        <!-- <form id="uploadForm" enctype="multipart/form-data" target="_self" method="post" action="">
+            <input id="fileupload" name="myfile" type="file" accept="image/*" />
+            <input type="submit" value="submit" id="submit" />
+         </form> -->
+         <input type="file" id="thumbnail" accept="image/*">
+    </div>
+    <div>
+        <img id="preview" src="img/default.png" alt="thumbnail">
     </div>
 </body>
     <script type="module" src="./dist/game.js"></script>

@@ -6,19 +6,58 @@ import { Sprites } from "./js/classes/Sprites.js";
 import { CollisionBlock } from "./js/types/collisionBlock.js";
 import { Util } from "./js/utils.js";
 
-let codeEnableCanvas = "4488";
+let codeEnableCanvas = "1288";
 
-let button = <HTMLInputElement>document.getElementById("button");
+let SubmitCodeButton = <HTMLInputElement>document.getElementById("button");
 let codeSection = <HTMLInputElement>document.getElementById("codeSection");
 let textInput = <HTMLInputElement>document.getElementById("code");
+let submitImageButton = <HTMLInputElement>document.getElementById("thumbnail");
 
-button.addEventListener("click", () => {
+SubmitCodeButton.addEventListener("click", () => {
   enableCanvas(textInput.value);
+});
+
+// submitImageButton.addEventListener("click", () => {
+//   console.log("asdasdasdasdasd");
+// });
+
+submitImageButton.addEventListener("change", (event) => {
+  console.log(submitImageButton.files?.item(0));
+  const file = submitImageButton.files?.item(0);
+
+  file?.arrayBuffer().then((arrayBuffer) => {
+    const blob = new Blob([new Uint8Array(arrayBuffer)], { type: file.type });
+    const reader = new FileReader();
+    if (submitImageButton.files != null || submitImageButton.files != undefined) {
+      reader.readAsDataURL(blob);
+
+      reader.onload = () => {
+        console.log(reader.result);
+        if (reader.result != null) {
+          localStorage.setItem("thumbnail", reader.result.toString());
+        }
+      };
+
+      // reader.addEventListener("load", () => localStorage.setItem("thumbnail", reader.result));
+    }
+  });
+
+  const thumbnail = localStorage.getItem("thumbnail");
+  console.log(thumbnail);
+
+  const previewImage = document.getElementById("preview");
+
+  if (thumbnail) {
+    previewImage!.setAttribute("src", thumbnail);
+  } else {
+    previewImage!.setAttribute("src", "img/default.png");
+  }
+  console.log(previewImage);
 });
 
 let canvas = document.querySelector("canvas");
 if (canvas != undefined) {
-  canvas.style.display = "none";
+  // canvas.style.display = "none";
 }
 
 let contextDefinition = (): CanvasRenderingContext2D => {
@@ -122,6 +161,7 @@ function playersSetup() {
       run: { imgSrc: "./img/Characters/Martial Hero/Sprites/Run.png", framesTotal: 8 },
       jump: { imgSrc: "./img/Characters/Martial Hero/Sprites/Jump.png", framesTotal: 2 },
       fall: { imgSrc: "./img/Characters/Martial Hero/Sprites/Fall.png", framesTotal: 2 },
+      atack1: { imgSrc: "./img/Characters/Martial Hero/Sprites/Attack1.png", framesTotal: 6 },
     },
   });
 }

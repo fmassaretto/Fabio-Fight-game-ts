@@ -6,10 +6,12 @@ export class Controller {
     lastKey: string;
     d: { pressed: boolean };
     w: { pressed: boolean };
+    space: { pressed: boolean };
   } = {
     a: { pressed: false },
     d: { pressed: false },
     w: { pressed: false },
+    space: { pressed: false },
     lastKey: "",
   };
   private static player: Player;
@@ -28,6 +30,10 @@ export class Controller {
         break;
       case "w":
         this._keys.w.pressed = false;
+        break;
+      case " ":
+        this._keys.space.pressed = false;
+        Controller.player.attack();
         break;
       default:
         break;
@@ -48,6 +54,10 @@ export class Controller {
         this._keys.w.pressed = true;
         this._keys.lastKey = "w";
         break;
+      case " ":
+        this._keys.space.pressed = true;
+        this._keys.lastKey = " ";
+        break;
       default:
         break;
     }
@@ -61,13 +71,18 @@ export class Controller {
       Controller.player.switchSprite("run");
       Controller.player.velocity.x = 4;
     } else if (Controller._keys.w.pressed && Controller._keys.lastKey === "w") {
-      Controller.player.switchSprite("jump");
       if (Controller.player.velocity.y === 0) {
         Controller.player.velocity.y = -7;
       }
+
+      if (Controller.player.velocity.y < 0) {
+        Controller.player.switchSprite("jump");
+      }
     } else {
+      if (Controller.player.velocity.y === 0) {
+        Controller.player.switchSprite("idle");
+      }
       Controller.player.velocity.x = 0;
-      Controller.player.switchSprite("idle");
     }
   }
 }
