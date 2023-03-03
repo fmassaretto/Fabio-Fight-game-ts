@@ -1,0 +1,8 @@
+#game {
+    display: inline-flex;
+
+}
+#player1, #player2 {
+    margin-top: 20px;
+    margin-left: 50px;
+}
