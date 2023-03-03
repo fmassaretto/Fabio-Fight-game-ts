@@ -98,27 +98,29 @@ export class Sprites {
   switchSprite(spriteType: string) {
     switch (spriteType) {
       case "idle":
-        if (this._sprites.idle !== undefined) {
-          this.image.src = this._sprites.idle?.imgSrc;
-          this._frameTotal = this._sprites.idle?.framesTotal;
+        if (this._sprites.idle !== undefined && this._sprites.idle.imgSrc !== this.image.src) {
+          this.image.src = this._sprites.idle.imgSrc;
+          this._frameTotal = this._sprites.idle.framesTotal;
         }
         break;
       case "run":
-        if (this._sprites.run !== undefined) {
-          this.image.src = this._sprites.run?.imgSrc;
-          this._frameTotal = this._sprites.run?.framesTotal;
+        if (this._sprites.run !== undefined && this._sprites.run.imgSrc !== this.image.src) {
+          this.image.src = this._sprites.run.imgSrc;
+          this._frameTotal = this._sprites.run.framesTotal;
         }
         break;
       case "jump":
-        if (this._sprites.jump !== undefined) {
-          this.image.src = this._sprites.jump?.imgSrc;
-          this._frameTotal = this._sprites.jump?.framesTotal;
+        if (this._sprites.jump !== undefined && this._sprites.jump.imgSrc !== this.image.src) {
+          this.image.src = this._sprites.jump.imgSrc;
+          this._frameTotal = this._sprites.jump.framesTotal;
+          this.currentFrame = 0;
         }
         break;
       case "fall":
-        if (this._sprites.fall !== undefined) {
-          this.image.src = this._sprites.fall?.imgSrc;
-          this._frameTotal = this._sprites.fall?.framesTotal;
+        if (this._sprites.fall !== undefined && this._sprites.fall.imgSrc !== this.image.src) {
+          this.image.src = this._sprites.fall.imgSrc;
+          this._frameTotal = this._sprites.fall.framesTotal;
+          this.currentFrame = 0;
         }
         break;
 
