@@ -11,7 +11,13 @@ let codeEnableCanvas = "1288";
 let SubmitCodeButton = <HTMLInputElement>document.getElementById("button");
 let codeSection = <HTMLInputElement>document.getElementById("codeSection");
 let textInput = <HTMLInputElement>document.getElementById("code");
-let submitImageButton = <HTMLInputElement>document.getElementById("thumbnail");
+let gameDiv = <HTMLInputElement>document.getElementById("game");
+let canvas = document.querySelector("canvas");
+
+if (gameDiv != undefined) {
+  gameDiv.style.display = "none";
+}
+// let submitImageButton = <HTMLInputElement>document.getElementById("thumbnail");
 
 SubmitCodeButton.addEventListener("click", () => {
   enableCanvas(textInput.value);
@@ -21,44 +27,40 @@ SubmitCodeButton.addEventListener("click", () => {
 //   console.log("asdasdasdasdasd");
 // });
 
-submitImageButton.addEventListener("change", (event) => {
-  console.log(submitImageButton.files?.item(0));
-  const file = submitImageButton.files?.item(0);
+// submitImageButton.addEventListener("change", (event) => {
+//   console.log(submitImageButton.files?.item(0));
+//   const file = submitImageButton.files?.item(0);
 
-  file?.arrayBuffer().then((arrayBuffer) => {
-    const blob = new Blob([new Uint8Array(arrayBuffer)], { type: file.type });
-    const reader = new FileReader();
-    if (submitImageButton.files != null || submitImageButton.files != undefined) {
-      reader.readAsDataURL(blob);
+//   file?.arrayBuffer().then((arrayBuffer) => {
+//     const blob = new Blob([new Uint8Array(arrayBuffer)], { type: file.type });
+//     const reader = new FileReader();
+//     if (submitImageButton.files != null || submitImageButton.files != undefined) {
+//       reader.readAsDataURL(blob);
 
-      reader.onload = () => {
-        console.log(reader.result);
-        if (reader.result != null) {
-          localStorage.setItem("thumbnail", reader.result.toString());
-        }
-      };
+//       reader.onload = () => {
+//         console.log(reader.result);
+//         if (reader.result != null) {
+//           localStorage.setItem("thumbnail", reader.result.toString());
+//         }
+//       };
 
-      // reader.addEventListener("load", () => localStorage.setItem("thumbnail", reader.result));
-    }
-  });
+//       // reader.addEventListener("load", () => localStorage.setItem("thumbnail", reader.result));
+//     }
+//   });
 
-  const thumbnail = localStorage.getItem("thumbnail");
-  console.log(thumbnail);
+//   const thumbnail = localStorage.getItem("thumbnail");
+//   console.log(thumbnail);
 
-  const previewImage = document.getElementById("preview");
+//   const previewImage = document.getElementById("preview");
 
-  if (thumbnail) {
-    previewImage!.setAttribute("src", thumbnail);
-  } else {
-    previewImage!.setAttribute("src", "img/default.png");
-  }
-  console.log(previewImage);
-});
-
-let canvas = document.querySelector("canvas");
-if (canvas != undefined) {
-  // canvas.style.display = "none";
-}
+//   if (thumbnail) {
+//     previewImage!.setAttribute("src", thumbnail);
+//     console.log(previewImage);
+//   } else {
+//     previewImage!.setAttribute("src", "img/default.png");
+//     console.log("default");
+//   }
+// });
 
 let contextDefinition = (): CanvasRenderingContext2D => {
   const canvasWidth = 864;
@@ -85,10 +87,8 @@ let collisionBlocksPosition: CollisionBlock[] = [];
 
 function enableCanvas(code: string) {
   if (code === codeEnableCanvas) {
-    if (canvas != undefined) {
-      canvas.style.display = "block";
-      codeSection.style.display = "none";
-    }
+    gameDiv.style.display = "inline-flex";
+    codeSection.style.display = "none";
   }
 }
 
