@@ -33,7 +33,6 @@ export class Controller {
         break;
       case " ":
         this._keys.space.pressed = false;
-        Controller.player.attack();
         break;
       default:
         break;
@@ -57,6 +56,7 @@ export class Controller {
       case " ":
         this._keys.space.pressed = true;
         this._keys.lastKey = " ";
+        Controller.player.attack();
         break;
       default:
         break;
