@@ -12,11 +12,9 @@ let SubmitCodeButton = <HTMLInputElement>document.getElementById("button");
 let codeSection = <HTMLInputElement>document.getElementById("codeSection");
 let textInput = <HTMLInputElement>document.getElementById("code");
 let gameDiv = <HTMLInputElement>document.getElementById("game");
+let player2Div = <HTMLInputElement>document.getElementById("player2");
 let canvas = document.querySelector("canvas");
 
-if (gameDiv != undefined) {
-  gameDiv.style.display = "none";
-}
 // let submitImageButton = <HTMLInputElement>document.getElementById("thumbnail");
 
 SubmitCodeButton.addEventListener("click", () => {
@@ -65,6 +63,10 @@ SubmitCodeButton.addEventListener("click", () => {
 let contextDefinition = (): CanvasRenderingContext2D => {
   const canvasWidth = 864;
   const canvasHeight = 480;
+  gameDiv.style.display = "none";
+
+  // TODO: remove next line after add player 2
+  player2Div.style.display = "none";
 
   if (canvas === null) throw new Error("Canvas is null");
 
